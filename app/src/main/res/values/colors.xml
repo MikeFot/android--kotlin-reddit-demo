@@ -11,7 +11,7 @@
     <color name="color_on_secondary">@color/md_black_1000</color>
 
     <color name="card_background">@color/md_grey_200</color>
-    <color name="screen_background">@color/md_grey_400</color>
+    <color name="screen_background">@color/md_grey_100</color>
     <color name="error">@color/md_pink_600</color>
 
 </resources>
