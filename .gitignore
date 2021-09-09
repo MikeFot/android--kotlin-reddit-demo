@@ -1,0 +1,52 @@
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/captures
+.externalNativeBuild
+.cxx
+
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+.idea
+.gradle
+*~
+bin/
+gen/
+build/
+target/
+app/build/
+/*/out
+
+*.iml
+*.iws
+*.ipr
+
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
+.classpath
+.project
+.settings
+
+# Mac
+.DS_Store
+
+# Ruby history file
+.irb-history
+
+google-services.json
+
