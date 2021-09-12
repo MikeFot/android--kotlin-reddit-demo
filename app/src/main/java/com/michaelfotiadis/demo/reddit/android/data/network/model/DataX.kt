@@ -69,7 +69,7 @@ data class DataX(
     @SerializedName("downs")
     val downs: Int,
     @SerializedName("edited")
-    val edited: Boolean,
+    val edited: String,
     @SerializedName("gilded")
     val gilded: Int,
     @SerializedName("gildings")

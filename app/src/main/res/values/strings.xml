@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Android Reddit Demo</string>
+    <string name="label_retry">Retry</string>
 </resources>

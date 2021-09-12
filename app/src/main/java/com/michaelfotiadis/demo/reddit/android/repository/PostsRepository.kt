@@ -19,18 +19,17 @@ class PostsRepository(
         return try {
             val response = api.getRedditPosts(after)
             if (response.isSuccessful) {
-                RepoResult(response.body())
+                RepoResult.SuccessResult(response.body() as RedditResponse)
             } else {
                 val retrofitException = RetrofitException.httpError(
                     "",
                     response,
                     retrofit
                 )
-                RepoResult(dataSourceError = retrofitErrorMapper.convert(retrofitException))
+                RepoResult.ErrorResult(retrofitErrorMapper.convert(retrofitException))
             }
-
         } catch (exception: Exception) {
-            RepoResult(dataSourceError = retrofitErrorMapper.convert(exception))
+            RepoResult.ErrorResult(retrofitErrorMapper.convert(exception))
         }
     }
 

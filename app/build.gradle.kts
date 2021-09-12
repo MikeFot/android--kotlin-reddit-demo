@@ -1,12 +1,15 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    kotlin("android")
+    kotlin("kapt")
 }
 
-object DependencyVersions {
+object LibraryVersions {
     const val KOIN = "3.1.2"
     const val RETROFIT = "2.9.0"
     const val KTX = "2.3.1"
+    const val NAVIGATION = "2.3.5"
+    const val ROOM = "2.3.0"
 }
 
 
@@ -57,16 +60,24 @@ dependencies {
 
     implementation("com.jakewharton.timber:timber:5.0.1")
 
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${DependencyVersions.KTX}")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${DependencyVersions.KTX}")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${LibraryVersions.KTX}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${LibraryVersions.KTX}")
 
-    implementation("io.insert-koin:koin-android:${DependencyVersions.KOIN}")
-    implementation("io.insert-koin:koin-android-compat:${DependencyVersions.KOIN}")
+    implementation("io.insert-koin:koin-android:${LibraryVersions.KOIN}")
+    implementation("io.insert-koin:koin-android-compat:${LibraryVersions.KOIN}")
 
-    implementation("com.squareup.retrofit2:retrofit:${DependencyVersions.RETROFIT}")
-    implementation("com.squareup.retrofit2:converter-gson:${DependencyVersions.RETROFIT}")
+    implementation("com.squareup.retrofit2:retrofit:${LibraryVersions.RETROFIT}")
+    implementation("com.squareup.retrofit2:converter-gson:${LibraryVersions.RETROFIT}")
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
+
+    implementation("androidx.navigation:navigation-fragment-ktx:${LibraryVersions.NAVIGATION}")
+    implementation("androidx.navigation:navigation-ui-ktx:${LibraryVersions.NAVIGATION}")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")
+
+    implementation( "androidx.room:room-runtime:${LibraryVersions.ROOM}")
+    kapt("androidx.room:room-compiler:${LibraryVersions.ROOM}")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

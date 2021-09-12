@@ -8,8 +8,9 @@ package com.michaelfotiadis.demo.reddit.android.repository.result
 
 import com.michaelfotiads.xkcdreader.repo.error.DataSourceError
 
-class RepoResult<T>(
-    val payload: T? = null,
-    val dataSourceError: DataSourceError? = null,
-    val next: String? = null
-)
+sealed class RepoResult<out T : Any> {
+
+    data class SuccessResult<out T : Any>(val payload: T) : RepoResult<T>()
+    data class ErrorResult(val dataSourceError: DataSourceError) : RepoResult<Nothing>()
+
+}

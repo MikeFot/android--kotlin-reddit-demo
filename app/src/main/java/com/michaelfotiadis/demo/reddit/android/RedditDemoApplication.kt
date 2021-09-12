@@ -1,10 +1,7 @@
 package com.michaelfotiadis.demo.reddit.android
 
 import android.app.Application
-import com.michaelfotiadis.demo.reddit.android.di.appModule
-import com.michaelfotiadis.demo.reddit.android.di.mainActivityModule
-import com.michaelfotiadis.demo.reddit.android.di.networkModule
-import com.michaelfotiadis.demo.reddit.android.di.repositoryModule
+import com.michaelfotiadis.demo.reddit.android.di.*
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -23,8 +20,10 @@ class RedditDemoApplication : Application() {
             androidContext(this@RedditDemoApplication)
             modules(
                 appModule,
+                databaseModule,
                 networkModule,
                 repositoryModule,
+                domainModule,
                 mainActivityModule
             )
         }
