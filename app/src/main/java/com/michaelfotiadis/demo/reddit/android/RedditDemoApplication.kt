@@ -29,6 +29,7 @@ class RedditDemoApplication : Application() {
         }
 
         applicationInitializer.initialiseLogging()
+        applicationInitializer.initialiseStetho()
     }
 
 }

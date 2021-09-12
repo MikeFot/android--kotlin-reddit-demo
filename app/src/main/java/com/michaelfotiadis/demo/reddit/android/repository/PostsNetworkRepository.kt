@@ -7,7 +7,7 @@ import com.michaelfotiadis.demo.reddit.android.repository.error.mapper.RetrofitE
 import com.michaelfotiadis.demo.reddit.android.repository.result.RepoResult
 import retrofit2.Retrofit
 
-class PostsRepository(
+class PostsNetworkRepository(
     private val retrofit: Retrofit,
     private val retrofitErrorMapper: RetrofitErrorMapper
 ) {

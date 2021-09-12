@@ -1,45 +1,69 @@
 package com.michaelfotiadis.demo.reddit.android.ui.activity.main
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.michaelfotiadis.demo.reddit.android.data.network.model.RedditResponse
-import com.michaelfotiadis.demo.reddit.android.domain.GetColumnCountInteractor
-import com.michaelfotiadis.demo.reddit.android.domain.GetPostsInteractor
+import com.michaelfotiadis.demo.reddit.android.domain.CalculateColumnCountInteractor
+import com.michaelfotiadis.demo.reddit.android.domain.FetchAndWritePostsInteractor
+import com.michaelfotiadis.demo.reddit.android.repository.ReadLocalPostsInteractor
 import com.michaelfotiadis.demo.reddit.android.repository.result.RepoResult
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.mapper.UiPostsMapper
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.model.MainUiState
+import com.michaelfotiadis.demo.reddit.android.ui.activity.main.model.UiPost
 import com.michaelfotiadis.demo.reddit.android.ui.error.UiErrorMapper
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class MainViewModel(
-    private val getPostsInteractor: GetPostsInteractor,
-    private val getColumnsInteractor: GetColumnCountInteractor,
+    private val fetchAndWritePostsInteractor: FetchAndWritePostsInteractor,
+    private val calculateColumnsInteractor: CalculateColumnCountInteractor,
+    readLocalPostsInteractor: ReadLocalPostsInteractor,
     private val uiPostsMapper: UiPostsMapper,
     private val uiErrorMapper: UiErrorMapper
 ) : ViewModel() {
 
-    init {
-        Timber.d("VIEWMODEL HASH : ${this.hashCode()}")
-    }
-
+    val pagedItemsLiveData: LiveData<PagedList<UiPost>>
     val uiLiveData = MutableLiveData<MainUiState>()
-    val columnsLiveData = MutableLiveData<Int>()
+    val columnsLiveData = MutableLiveData(1)
 
     private var nextPage: String? = null
 
     init {
-        uiLiveData.postValue(MainUiState.Idle)
+        uiLiveData.value = MainUiState.Idle
+
+        class UiPostsBoundaryCallback : PagedList.BoundaryCallback<UiPost>() {
+            override fun onItemAtEndLoaded(itemAtEnd: UiPost) {
+                super.onItemAtEndLoaded(itemAtEnd)
+                loadPosts(false)
+            }
+        }
+
+        pagedItemsLiveData = LivePagedListBuilder(
+            readLocalPostsInteractor.readPosts().map(uiPostsMapper::map),
+            1
+        ).setBoundaryCallback(UiPostsBoundaryCallback())
+            .build()
+
         refreshColumnCount()
     }
 
-    fun getPosts() {
+    fun onViewReady() {
+        //loadPosts(false)
+    }
+
+    fun loadPosts(isRefresh: Boolean) {
         viewModelScope.launch {
+            if (isRefresh) {
+                nextPage = null
+            }
 
             uiLiveData.postValue(MainUiState.Loading)
 
-            when (val result = getPostsInteractor.getPosts(nextPage)) {
+            when (val result = fetchAndWritePostsInteractor.getPosts(nextPage, isRefresh)) {
                 is RepoResult.ErrorResult -> {
                     val uiError = uiErrorMapper.convert(result.dataSourceError)
                     uiLiveData.postValue(MainUiState.Error(uiError))
@@ -47,10 +71,7 @@ class MainViewModel(
                 is RepoResult.SuccessResult<RedditResponse> -> {
                     Timber.d("Received ${result.payload.data.children.size} posts for page $nextPage")
                     nextPage = result.payload.data.after
-
-                    uiPostsMapper.map(result.payload.data.children)
-
-                    uiLiveData.postValue(MainUiState.Success)
+                    uiLiveData.postValue(MainUiState.Idle)
                 }
             }
 
@@ -62,7 +83,10 @@ class MainViewModel(
     }
 
     fun refreshColumnCount() {
-        columnsLiveData.postValue(getColumnsInteractor.getColumnCount())
+        val updateColumnCount = calculateColumnsInteractor.getColumnCount()
+        if (updateColumnCount != columnsLiveData.value) {
+            columnsLiveData.postValue(updateColumnCount)
+        }
     }
 
 }

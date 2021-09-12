@@ -1,5 +1,6 @@
 package com.michaelfotiadis.demo.reddit.android.network.factory
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,6 +16,11 @@ internal object OkHttpBuilderFactory {
             }
             loggingInterceptor.level = level
             this.addInterceptor(loggingInterceptor)
+
+            if (isDebugEnabled) {
+                this.addNetworkInterceptor(StethoInterceptor())
+            }
+
             this.cache(cache)
         }
     }

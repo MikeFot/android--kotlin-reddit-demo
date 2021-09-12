@@ -2,7 +2,7 @@ package com.michaelfotiadis.demo.reddit.android.domain
 
 import com.michaelfotiadis.demo.reddit.android.repository.ConfigurationRepository
 
-class GetColumnCountInteractor(private val configurationRepository: ConfigurationRepository) {
+class CalculateColumnCountInteractor(private val configurationRepository: ConfigurationRepository) {
 
     fun getColumnCount(): Int {
         return when {

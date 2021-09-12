@@ -13,5 +13,6 @@
     <color name="card_background">@color/md_grey_200</color>
     <color name="screen_background">@color/md_grey_100</color>
     <color name="error">@color/md_pink_600</color>
+    <color name="link_text">@color/md_blue_700</color>
 
 </resources>

@@ -8,10 +8,10 @@ object LibraryVersions {
     const val KOIN = "3.1.2"
     const val RETROFIT = "2.9.0"
     const val KTX = "2.3.1"
-    const val NAVIGATION = "2.3.5"
     const val ROOM = "2.3.0"
+    const val PAGING = "2.1.0"
+    const val STETHO = "1.5.1"
 }
-
 
 android {
     compileSdk = 30
@@ -71,13 +71,19 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.7.0")
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:${LibraryVersions.NAVIGATION}")
-    implementation("androidx.navigation:navigation-ui-ktx:${LibraryVersions.NAVIGATION}")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.recyclerview:recyclerview:1.2.1")
 
-    implementation( "androidx.room:room-runtime:${LibraryVersions.ROOM}")
+    implementation("androidx.paging:paging-runtime-ktx:${LibraryVersions.PAGING}")
+
+    implementation("androidx.room:room-runtime:${LibraryVersions.ROOM}")
+    implementation("androidx.room:room-ktx:${LibraryVersions.ROOM}")
     kapt("androidx.room:room-compiler:${LibraryVersions.ROOM}")
+
+    implementation("com.facebook.stetho:stetho:${LibraryVersions.STETHO}")
+    implementation("com.facebook.stetho:stetho-okhttp3:${LibraryVersions.STETHO}")
+
+    implementation("io.noties.markwon:core:4.6.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")

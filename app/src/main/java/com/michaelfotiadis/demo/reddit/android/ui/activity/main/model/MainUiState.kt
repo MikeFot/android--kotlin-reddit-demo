@@ -5,6 +5,5 @@ import com.michaelfotiadis.demo.reddit.android.ui.error.UiError
 sealed class MainUiState {
     object Idle : MainUiState()
     object Loading : MainUiState()
-    object Success : MainUiState()
     data class Error(val uiError: UiError) : MainUiState()
 }
