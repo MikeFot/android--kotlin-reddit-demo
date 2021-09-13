@@ -20,7 +20,6 @@ Sample Android Kotlin Recycler View demo fetching data from Reddit Android.
 * [AndroidX](https://developer.android.com/jetpack/androidx/)
 * [Paging Library](https://developer.android.com/topic/libraries/architecture/paging)
 * [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
-* [Card Stack View](https://github.com/yuyakaido/CardStackView)
 * [Koin](https://insert-koin.io/)
 * [Retrofit 2](https://github.com/square/retrofit)
 * [Timber](https://github.com/JakeWharton/timber)

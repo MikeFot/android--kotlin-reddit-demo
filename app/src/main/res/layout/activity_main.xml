@@ -23,9 +23,8 @@
                 android:id="@+id/posts_list_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:layout_marginEnd="@dimen/margin_16dp"
                 app:layoutManager="LinearLayoutManager"
+
                 tools:listitem="@layout/item_post" />
 
             <ProgressBar

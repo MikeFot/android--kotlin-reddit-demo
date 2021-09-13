@@ -11,19 +11,21 @@ import com.michaelfotiadis.demo.reddit.android.network.factory.OkHttpBuilderFact
 import com.michaelfotiadis.demo.reddit.android.network.factory.RetrofitBuilderFactory
 import com.michaelfotiadis.demo.reddit.android.repository.ConfigurationRepository
 import com.michaelfotiadis.demo.reddit.android.repository.PostsLocalRepository
-import com.michaelfotiadis.demo.reddit.android.repository.ReadLocalPostsInteractor
+import com.michaelfotiadis.demo.reddit.android.domain.ReadLocalPostsInteractor
+import com.michaelfotiadis.demo.reddit.android.domain.TimeAgoMessageInteractor
 import com.michaelfotiadis.demo.reddit.android.repository.error.mapper.RetrofitErrorMapper
 import com.michaelfotiadis.demo.reddit.android.repository.mapper.RedditPostsLocalMapper
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.MainActivity
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.MainViewModel
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.mapper.UiPostsMapper
-import com.michaelfotiadis.demo.reddit.android.ui.error.UiErrorMapper
+import com.michaelfotiadis.demo.reddit.android.ui.activity.main.error.UiErrorMapper
 import io.noties.markwon.Markwon
 import okhttp3.Cache
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import java.util.*
 
 val appModule = module {
 
@@ -114,6 +116,10 @@ val domainModule = module {
     }
 
     factory {
+        TimeAgoMessageInteractor(Locale.getDefault())
+    }
+
+    factory {
         FetchAndWritePostsInteractor(
             postsNetworkRepository = get(),
             postsLocalRepository = get(),
@@ -137,7 +143,9 @@ val mainActivityModule = module {
             UiErrorMapper()
         }
         scoped {
-            UiPostsMapper()
+            UiPostsMapper(
+                timeAgoMessageInteractor = get()
+            )
         }
         viewModel {
             MainViewModel(

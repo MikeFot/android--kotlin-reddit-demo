@@ -9,12 +9,12 @@ import androidx.paging.PagedList
 import com.michaelfotiadis.demo.reddit.android.data.network.model.RedditResponse
 import com.michaelfotiadis.demo.reddit.android.domain.CalculateColumnCountInteractor
 import com.michaelfotiadis.demo.reddit.android.domain.FetchAndWritePostsInteractor
-import com.michaelfotiadis.demo.reddit.android.repository.ReadLocalPostsInteractor
+import com.michaelfotiadis.demo.reddit.android.domain.ReadLocalPostsInteractor
 import com.michaelfotiadis.demo.reddit.android.repository.result.RepoResult
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.mapper.UiPostsMapper
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.model.MainUiState
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.model.UiPost
-import com.michaelfotiadis.demo.reddit.android.ui.error.UiErrorMapper
+import com.michaelfotiadis.demo.reddit.android.ui.activity.main.error.UiErrorMapper
 import kotlinx.coroutines.launch
 import timber.log.Timber
 

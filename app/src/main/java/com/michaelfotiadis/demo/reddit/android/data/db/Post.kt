@@ -18,5 +18,6 @@ data class Post(
     val downVotes: Int = 0,
     val thumbnailLink: String? = null,
     val containsSpoilers: Boolean = false,
-    val countOfAwards: Int = 0
+    val countOfAwards: Int = 0,
+    val createdUtc: Long
 )

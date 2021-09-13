@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-package com.michaelfotiadis.demo.reddit.android.ui.error
+package com.michaelfotiadis.demo.reddit.android.ui.activity.main.error
 
 import com.michaelfotiads.xkcdreader.repo.error.DataSourceError
 import com.michaelfotiads.xkcdreader.repo.error.DataSourceErrorKind

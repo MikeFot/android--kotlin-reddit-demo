@@ -43,18 +43,6 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
         viewFlipperController = ViewFlipperController(binding.viewFlipper)
 
         binding.postsListView.adapter = adapter
-        val itemDecoration = DividerItemDecoration(
-            this,
-            DividerItemDecoration.VERTICAL
-        ).apply {
-            setDrawable(
-                AppCompatResources.getDrawable(
-                    this@MainActivity,
-                    R.drawable.item_decorator
-                )!!
-            )
-        }
-        binding.postsListView.addItemDecoration(itemDecoration)
 
         binding.swipeRefreshLayout.apply {
             setColorSchemeColors(

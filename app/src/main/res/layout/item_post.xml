@@ -1,42 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="@dimen/padding_8dp">
+    android:layout_margin="@dimen/margin_8dp"
+    app:cardBackgroundColor="@color/card_background"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
+    app:contentPadding="@dimen/padding_8dp">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_root"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8dp"
-        android:linksClickable="false"
-        android:textAppearance="?attr/textAppearanceBody1"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="A Title!" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8dp"
-        android:autoLink="web"
-        android:ellipsize="end"
-        android:linksClickable="false"
-        android:maxHeight="100dp"
-        android:textAppearance="?attr/textAppearanceBody2"
-        android:textColorLink="@color/link_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="Note 1. [Check out our apps wiki](https://www.reddit.com/r/Android/wiki/index#wiki_apps) for previous threads and apps curated by the reddit Android community!  \n\n[Download the official /r/Android App Store based on our wiki!]" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4dp"
+            android:layout_marginBottom="@dimen/margin_4dp"
+            android:linksClickable="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/barrier"
+            app:layout_constraintEnd_toStartOf="@+id/thumbnail_image"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="A Title!" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/thumbnail_image"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/margin_4dp"
+            android:layout_marginEnd="@dimen/margin_4dp"
+            android:contentDescription="@string/ct_post_thumbnail"
+            app:layout_constraintBottom_toTopOf="@+id/barrier"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/title"
+            app:layout_constraintTop_toTopOf="@id/title"
+            tools:src="@mipmap/ic_launcher" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/time_ago_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/thumbnail_image" />
+
+        <TextView
+            android:id="@+id/time_ago_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4dp"
+            android:layout_marginBottom="@dimen/margin_4dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintBottom_toTopOf="@+id/content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/barrier"
+            tools:text="5 minutes ago" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_4dp"
+            android:layout_marginBottom="@dimen/margin_4dp"
+            android:autoLink="web"
+            android:ellipsize="end"
+            android:linksClickable="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColorLink="@color/link_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_ago_text"
+            tools:text="Note 1. [Check out our apps wiki](https://www.reddit.com/r/Android/wiki/index#wiki_apps) for previous threads and apps curated by the reddit Android community!  \n\n[Download the official /r/Android App Store based on our wiki!]" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

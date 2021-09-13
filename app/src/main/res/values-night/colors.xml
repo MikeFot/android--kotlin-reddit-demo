@@ -10,7 +10,7 @@
     <color name="color_secondary_variant">@color/md_deep_orange_900</color>
     <color name="color_on_secondary">@color/md_white_1000</color>
 
-    <color name="card_background">@color/md_grey_700</color>
+    <color name="card_background">@color/md_grey_800</color>
     <color name="screen_background">@color/md_grey_900</color>
     <color name="error">@color/md_pink_800</color>
     <color name="link_text">@color/md_cyan_400</color>

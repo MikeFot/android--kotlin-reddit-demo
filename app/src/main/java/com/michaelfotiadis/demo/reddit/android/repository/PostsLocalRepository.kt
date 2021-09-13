@@ -11,6 +11,10 @@ class PostsLocalRepository(
         postsDao.insertAll(redditPosts)
     }
 
+    suspend fun deleteAllAndInsertPosts(redditPosts: List<Post>) {
+        postsDao.deleteAndInsertEntries(redditPosts)
+    }
+
     suspend fun nukeTable() {
         postsDao.nukeTable()
     }

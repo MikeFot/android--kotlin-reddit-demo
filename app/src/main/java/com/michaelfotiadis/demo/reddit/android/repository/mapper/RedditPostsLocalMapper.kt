@@ -25,9 +25,15 @@ class RedditPostsLocalMapper {
                     permalink = item.permalink,
                     upVotes = item.ups,
                     downVotes = item.downs,
-                    thumbnailLink = item.thumbnail,
+                    // quick way of checking - needs validator
+                    thumbnailLink = if (item.thumbnail.startsWith("http")) {
+                        item.thumbnail
+                    } else {
+                        null
+                    },
                     containsSpoilers = item.spoiler,
-                    countOfAwards = item.allAwardings.size
+                    countOfAwards = item.allAwardings.size,
+                    createdUtc = item.createdUtc.toLong()
                 ).apply(dbPosts::add)
             }
         }

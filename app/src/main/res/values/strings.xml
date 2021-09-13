@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Android Reddit Demo</string>
     <string name="label_retry">Retry</string>
+    <string name="ct_post_thumbnail">Post Thumbnail</string>
 </resources>

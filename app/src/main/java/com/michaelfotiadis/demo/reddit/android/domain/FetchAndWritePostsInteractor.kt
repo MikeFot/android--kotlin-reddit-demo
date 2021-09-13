@@ -19,11 +19,12 @@ class FetchAndWritePostsInteractor(
                 result
             }
             is RepoResult.SuccessResult -> {
-                if (isRefresh) {
-                    postsLocalRepository.nukeTable()
-                }
                 val entities = localMapper.map(result.payload.data.children)
-                postsLocalRepository.insertPosts(entities)
+                if (isRefresh) {
+                    postsLocalRepository.deleteAllAndInsertPosts(entities)
+                } else {
+                    postsLocalRepository.insertPosts(entities)
+                }
                 result
             }
         }

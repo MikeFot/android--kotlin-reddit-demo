@@ -4,7 +4,7 @@
  * All rights reserved.
  */
 
-package com.michaelfotiadis.demo.reddit.android.ui.error
+package com.michaelfotiadis.demo.reddit.android.ui.activity.main.error
 
 import androidx.annotation.StringRes
 import com.michaelfotiadis.demo.reddit.android.R

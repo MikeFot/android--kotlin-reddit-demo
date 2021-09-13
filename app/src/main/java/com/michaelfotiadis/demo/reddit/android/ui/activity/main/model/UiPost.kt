@@ -4,6 +4,7 @@ data class UiPost(
     val id: String,
     val title: String,
     val previewContent: String,
-    val fullContent: String,
-    val permalink: String
+    val permalink: String,
+    val timeAgoMessage: String,
+    val thumbnailLink: String? = null
 )

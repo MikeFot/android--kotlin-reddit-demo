@@ -1,4 +1,4 @@
-package com.michaelfotiadis.demo.reddit.android.repository
+package com.michaelfotiadis.demo.reddit.android.domain
 
 import androidx.paging.DataSource
 import com.michaelfotiadis.demo.reddit.android.data.db.Post

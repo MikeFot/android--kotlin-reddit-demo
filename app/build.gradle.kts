@@ -11,6 +11,7 @@ object LibraryVersions {
     const val ROOM = "2.3.0"
     const val PAGING = "2.1.0"
     const val STETHO = "1.5.1"
+    const val GLIDE = "4.12.0"
 }
 
 android {
@@ -84,6 +85,11 @@ dependencies {
     implementation("com.facebook.stetho:stetho-okhttp3:${LibraryVersions.STETHO}")
 
     implementation("io.noties.markwon:core:4.6.2")
+
+    implementation("com.github.marlonlom:timeago:4.0.3")
+
+    implementation("com.github.bumptech.glide:glide:${LibraryVersions.GLIDE}")
+    kapt("com.github.bumptech.glide:compiler:${LibraryVersions.GLIDE}")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
