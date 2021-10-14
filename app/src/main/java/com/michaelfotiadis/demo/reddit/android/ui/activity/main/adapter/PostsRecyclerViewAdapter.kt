@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.paging.PagedList
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -16,8 +17,13 @@ import timber.log.Timber
 
 
 class PostsRecyclerViewAdapter(
+    private val callback: Callback,
     private val markwon: Markwon
 ) : PagedListAdapter<UiPost, PostsRecyclerViewAdapter.ViewHolder>(DiffCallback()) {
+
+    interface Callback {
+        fun onPostClicked(uiPost: UiPost)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -32,21 +38,28 @@ class PostsRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position)?.let { item ->
+
+            with(holder.itemView) {
+                setOnClickListener { callback.onPostClicked(item) }
+            }
+
             markwon.setMarkdown(holder.titleView, item.title)
             markwon.setMarkdown(holder.contentView, item.previewContent)
             holder.timeAgoView.text = item.timeAgoMessage
 
-            item.thumbnailLink?.let { thumbnailLink ->
-                Glide.with(holder.itemView)
-                    .load(thumbnailLink)
-                    .centerInside()
-                    .into(holder.thumbnailImageView)
-
+            with(holder.thumbnailImageView) {
+                item.thumbnailLink?.let { thumbnailLink ->
+                    Glide.with(this)
+                        .load(thumbnailLink)
+                        .centerInside()
+                        .into(this)
+                }
             }
         }
     }
 
     class ViewHolder(binding: ItemPostBinding) : RecyclerView.ViewHolder(binding.root) {
+        val cardView: CardView = binding.itemCard
         val titleView: TextView = binding.title
         val contentView: TextView = binding.content
         val timeAgoView: TextView = binding.timeAgoText

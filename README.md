@@ -5,6 +5,7 @@ Sample Android Kotlin Recycler View demo fetching data from Reddit Android.
 ## Architecture
 
 - The app is entirely written in [Kotlin](https://kotlinlang.org/).
+- Gradle scripts are written in [Kotlin Gradle DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html).
 - [Koin](https://insert-koin.io/) is used for Dependency Injection.
 - Threading is handled by [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html).
 - The Activity has its own [Android ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) that emits actions via LiveData.

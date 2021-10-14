@@ -91,6 +91,11 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:${LibraryVersions.GLIDE}")
     kapt("com.github.bumptech.glide:compiler:${LibraryVersions.GLIDE}")
 
+    debugImplementation("com.facebook.flipper:flipper:0.110.0")
+    debugImplementation("com.facebook.soloader:soloader:0.10.1")
+
+    releaseImplementation("com.facebook.flipper:flipper-noop:0.110.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")

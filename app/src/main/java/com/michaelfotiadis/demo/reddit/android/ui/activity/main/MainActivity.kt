@@ -1,16 +1,17 @@
 package com.michaelfotiadis.demo.reddit.android.ui.activity.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.michaelfotiadis.demo.reddit.android.R
 import com.michaelfotiadis.demo.reddit.android.databinding.ActivityMainBinding
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.adapter.PostsRecyclerViewAdapter
 import com.michaelfotiadis.demo.reddit.android.ui.activity.main.model.MainUiState
+import com.michaelfotiadis.demo.reddit.android.ui.activity.main.model.UiPost
 import io.noties.markwon.Markwon
 import org.koin.android.ext.android.inject
 import org.koin.android.scope.AndroidScopeComponent
@@ -30,7 +31,11 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
 
     private lateinit var viewFlipperController: ViewFlipperController
     private val adapter: PostsRecyclerViewAdapter by lazy {
-        PostsRecyclerViewAdapter(markwon)
+        PostsRecyclerViewAdapter(object : PostsRecyclerViewAdapter.Callback {
+            override fun onPostClicked(uiPost: UiPost) {
+                navigateToReddit(uiPost.permalink)
+            }
+        }, markwon)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,10 +48,9 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
         viewFlipperController = ViewFlipperController(binding.viewFlipper)
 
         binding.postsListView.adapter = adapter
-
         binding.swipeRefreshLayout.apply {
             setColorSchemeColors(
-                ContextCompat.getColor(context, R.color.color_on_primary),
+                ContextCompat.getColor(context, R.color.primary_variant),
                 ContextCompat.getColor(context, R.color.primary)
             )
             setOnRefreshListener {
@@ -99,9 +103,11 @@ class MainActivity : AppCompatActivity(), AndroidScopeComponent {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.refreshColumnCount()
+    private fun navigateToReddit(permalink: String) {
+        Timber.d("Navigating to :$permalink")
+        startActivity(Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(permalink)
+        })
     }
 
 }

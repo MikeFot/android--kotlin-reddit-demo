@@ -10,7 +10,7 @@ class UiPostsMapper(private val timeAgoMessageInteractor: TimeAgoMessageInteract
         id = dbPost.id,
         title = dbPost.title,
         previewContent = dbPost.selfText,
-        permalink = dbPost.permalink,
+        permalink = "https://www.reddit.com${dbPost.permalink}",
         timeAgoMessage = timeAgoMessageInteractor.getFormattedText(dbPost.createdUtc),
         thumbnailLink = dbPost.thumbnailLink
     )

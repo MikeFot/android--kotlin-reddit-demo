@@ -6,6 +6,16 @@ import android.util.Log
 import com.facebook.stetho.Stetho
 import com.michaelfotiadis.demo.reddit.android.repository.ConfigurationRepository
 import timber.log.Timber
+import com.facebook.flipper.plugins.inspector.DescriptorMapping
+
+import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
+
+import com.facebook.flipper.android.AndroidFlipperClient
+import com.facebook.flipper.android.utils.FlipperUtils
+
+import com.facebook.flipper.core.FlipperClient
+import com.facebook.soloader.SoLoader
+
 
 @SuppressLint("LogNotTimber")
 class ApplicationInitializer(
@@ -29,6 +39,20 @@ class ApplicationInitializer(
         } else {
             Log.d(this::class.simpleName, "Skipped Stetho initialisation.")
         }
+    }
+
+    fun initialiseFlipper() {
+        if (configurationRepository.isDebugEnabled && FlipperUtils.shouldEnableFlipper(application)) {
+            SoLoader.init(application, false)
+            with(AndroidFlipperClient.getInstance(application)) {
+                addPlugin(InspectorFlipperPlugin(application, DescriptorMapping.withDefaults()))
+                start()
+            }
+            Log.d(this::class.simpleName, "Flipper initialised.")
+        } else {
+            Log.d(this::class.simpleName, "Skipped Flipper initialisation.")
+        }
+
     }
 
 }

@@ -52,7 +52,7 @@ class MainViewModel(
     }
 
     fun onViewReady() {
-        //loadPosts(false)
+        refreshColumnCount()
     }
 
     fun loadPosts(isRefresh: Boolean) {

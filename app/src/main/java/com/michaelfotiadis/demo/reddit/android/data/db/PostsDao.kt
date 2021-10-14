@@ -37,16 +37,8 @@ interface PostsDao {
 
     @Transaction
     suspend fun deleteAndInsertEntries(posts: List<Post>) {
-        val dbPosts = getAll()
-        dbPosts.filter { dbPost ->
-            posts.forEach { updatedPost ->
-                if (updatedPost.id == dbPost.id) {
-                    return@filter false
-                }
-            }
-            return@filter true
-        }.let { excludedDbPosts -> deleteMultiple(excludedDbPosts) }
-        updateMultiple(posts)
+        nukeTable()
+        insertAll(posts)
     }
 
 }
